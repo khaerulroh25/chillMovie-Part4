@@ -1,7 +1,9 @@
+import { useState } from "react";
 import BrandLogo from "../atoms/BrandLogo";
 import avatar from "../../img/icons/avatar.png";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
   return (
     <nav className="w-full bg-black">
       <div
@@ -22,10 +24,23 @@ export default function Navbar() {
           </span>
         </div>
 
-        <div className="ml-auto flex items-center gap-3">
-          <button className="md:hidden text-white">☰</button>
+        {open && (
+          <div className="md:hidden bg-black border-t border-[#2F3334] px-4">
+            <div className="flex justify-around py-3 text-[16px] md-text-sm text-white font-medium">
+              <span className="cursor-pointer hover:text-gray-300">Series</span>
+              <span className="cursor-pointer hover:text-gray-300">Film</span>
+              <span className="cursor-pointer hover:text-gray-300">
+                Daftar Saya
+              </span>
+            </div>
+          </div>
+        )}
 
-          <div className="hidden md:flex items-center gap-2 cursor-pointer">
+        <div className="ml-auto flex items-center gap-3">
+          <div
+            className="ml-auto flex items-center gap-2 cursor-pointer"
+            onClick={() => setOpen(!open)}
+          >
             <img
               src={avatar}
               alt="User Avatar"
