@@ -14,12 +14,15 @@ export default function ContinueMovieCard({
     <div
       className="
         relative
-        w-[340px]
-        h-[180px]
+        w-[309px]
+        h-[151px]
+        md:w-[302px]
+        md:h-[162px]
         shrink-0
         rounded-xl
         overflow-hidden
         cursor-pointer
+        bg-slate-500
       "
     >
       <img src={image} alt={title} className="w-full h-full object-cover" />
@@ -39,9 +42,11 @@ export default function ContinueMovieCard({
           text-white
         "
       >
-        <span className="text-[14px] font-medium truncate">{title}</span>
+        <span className="text-[14px] md:text-[18px] font-medium truncate">
+          {title}
+        </span>
 
-        <span className="flex items-center gap-1 text-[12px] text-gray-200">
+        <span className="flex items-center gap-1 md:text-[14px] text-[12px] text-gray-200">
           <img src={starIcon} alt="Star Icon" className="w-4 h-4" />
           {rating}
         </span>

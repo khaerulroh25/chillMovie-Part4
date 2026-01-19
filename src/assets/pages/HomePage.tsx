@@ -8,7 +8,7 @@ import Footer from "../components/organisms/Footer";
 
 export default function HomePage() {
   return (
-    <div className="bg-black text-white font-sans">
+    <div className="bg-black text-white font-sans md:w-[1440px] md:h-[2890px]">
       <Navbar />
       <HeroSection />
       <ContinueWatchingSection />

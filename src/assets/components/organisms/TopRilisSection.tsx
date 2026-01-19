@@ -12,8 +12,8 @@ import arrowRight from "../../img/icons/arrow-right.png";
 
 export default function TopRatingSection() {
   return (
-    <section className="mt-16">
-      <h2 className="px-4 md:px-[80px] mb-6 text-[20px] md:text-[24px] font-semibold text-white">
+    <section className="w-[428px] h-[210px] md:w-[1440px] md:h-[512px]">
+      <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
         Rilis Baru
       </h2>
 
@@ -37,7 +37,8 @@ export default function TopRatingSection() {
         <div
           className="
             flex
-            gap-[24px]
+            gap-[16px]
+            md:gap-[28px]
             overflow-x-auto
             md:overflow-hidden
             px-4
@@ -60,7 +61,7 @@ export default function TopRatingSection() {
           className="
             hidden md:flex
             absolute
-            right-[40px]
+            right-[50px]
             top-1/2
             -translate-y-1/2
             z-10
