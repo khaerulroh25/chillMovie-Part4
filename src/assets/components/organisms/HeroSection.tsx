@@ -30,7 +30,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap items-center gap-3">
             <Button
               variant="heroPrimary"
-              className="w-[55px] h-[25px] md:w-[93px] md:h-[45px] text-[12px] md:text-[16px]"
+              className="w-[100px] h-[25px] md:w-[93px] md:h-[45px] text-[12px] md:text-[16px]"
             >
               Mulai
             </Button>
