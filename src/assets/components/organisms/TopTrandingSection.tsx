@@ -10,7 +10,19 @@ import img5 from "../../img/movies/image211.png";
 import arrowLeft from "../../img/icons/arrow-left.png";
 import arrowRight from "../../img/icons/arrow-right.png";
 
-export default function TopRatingSection() {
+type Movie = {
+  id: number;
+  image: string;
+};
+
+interface TopTrandingSectionProps {
+  myList: Movie[];
+  onAddToMyList: (movie: Movie) => void;
+}
+export default function TopRatingSection({
+  myList = [],
+  onAddToMyList,
+}: TopTrandingSectionProps) {
   return (
     <section className="md:w-[1440px] md:h-[512px]">
       <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
@@ -49,11 +61,41 @@ export default function TopRatingSection() {
             snap-x snap-mandatory
           "
         >
-          <TopRatingCard image={img1} badge="top10" />
-          <TopRatingCard image={img2} badge="top10" />
-          <TopRatingCard image={img3} badge="top10" />
-          <TopRatingCard image={img4} badge="top10" />
-          <TopRatingCard image={img5} badge="top10" />
+          <TopRatingCard
+            id={11}
+            image={img1}
+            badge="top10"
+            myList={myList}
+            onAddToMyList={onAddToMyList}
+          />
+          <TopRatingCard
+            id={12}
+            image={img2}
+            badge="top10"
+            myList={myList}
+            onAddToMyList={onAddToMyList}
+          />
+          <TopRatingCard
+            id={13}
+            image={img3}
+            badge="top10"
+            myList={myList}
+            onAddToMyList={onAddToMyList}
+          />
+          <TopRatingCard
+            id={14}
+            image={img4}
+            badge="top10"
+            myList={myList}
+            onAddToMyList={onAddToMyList}
+          />
+          <TopRatingCard
+            id={15}
+            image={img5}
+            badge="top10"
+            myList={myList}
+            onAddToMyList={onAddToMyList}
+          />
         </div>
 
         <Button

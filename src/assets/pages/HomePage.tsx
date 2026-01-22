@@ -22,8 +22,8 @@ export default function HomePage({ myList, onAddToMyList }: HomePageProps) {
       <HeroSection />
       <ContinueWatchingSection />
       <TopRatingSection myList={myList} onAddToMyList={onAddToMyList} />
-      <TopTrandingSection />
-      <TopRilisSection />
+      <TopTrandingSection myList={myList} onAddToMyList={onAddToMyList} />
+      <TopRilisSection myList={myList} onAddToMyList={onAddToMyList} />
       <Footer />
     </div>
   );
