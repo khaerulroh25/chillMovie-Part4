@@ -53,7 +53,7 @@ export default function TopRatingCard({
           left-1/2
           -translate-x-1/2
           -translate-y-1/2
-          w-[300px]
+          w-[200px]
           h-[380px]
           md:w-[408px]
           md:h-[415px]
@@ -65,49 +65,60 @@ export default function TopRatingCard({
           pointer-events-none
           rounded-[20px]
           transition-all duration-300
-          group-hover:opacity-100
-          group-hover:scale-100
+          md:group-hover:opacity-100
+          md:group-hover:scale-100
           group-hover:pointer-events-auto
           z-50
         "
       >
         <img src={image} className="w-[408px] h-[255px] object-cover" />
 
-        <div className="gap-[17px] p-[29px] ">
+        <div className="gap-3 p-4 md:gap-[17px] md:p-[29px] ">
           <div className="flex items-center  gap-4 mb-4">
-            <Button variant="icon" className=" bg-white hover:bg-gray-200">
-              <img src={playIcon} alt="Play" className="w-4 h-4" />
-            </Button>
-
             <Button
               variant="icon"
-              onClick={() => onAddToMyList({ id, image })}
-              className=" border border-white/30 hover:bg-white/10"
+              className=" bg-white hover:bg-gray-200 p-2 md:p-3"
             >
               <img
-                src={isAdded ? checkIcon : addIcon}
-                alt="Tambah"
-                className="w-4 h-4"
+                src={playIcon}
+                alt="Play"
+                className="md:w-4 md:h-4 w-3 h-3"
               />
             </Button>
 
             <Button
               variant="icon"
-              className=" ml-auto border border-white/30 hover:bg-white/10"
+              onClick={() => onAddToMyList({ id, image })}
+              className=" border border-white/30 hover:bg-white/10 p-2 md:p-3"
             >
-              <img src={chevronIcon} alt="Like" className="w-4 h-4" />
+              <img
+                src={isAdded ? checkIcon : addIcon}
+                alt="Tambah"
+                className="md:w-4 md:h-4 w-3 h-3"
+              />
+            </Button>
+
+            <Button
+              variant="icon"
+              className=" ml-auto border border-white/30 hover:bg-white/10 p-2 md:p-3"
+            >
+              <img
+                src={chevronIcon}
+                alt="Like"
+                className="md:w-4 md:h-4 w-3 h-3"
+              />
             </Button>
           </div>
 
-          <div className="flex gap-2 text-[16px] mt-1">
-            <span className="px-3 py-1 text-xs font-medium text-[#C1C2C4] bg-[#CDF1FF4D] rounded-full">
+          <div className="flex gap-2 text-xs text-[16px] mt-1">
+            <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-[#C1C2C4] bg-[#CDF1FF4D] rounded-full">
               16+
             </span>
 
             <span className="text-white">16 Episode</span>
           </div>
 
-          <div className="flex justify-between text-[18px] text-[#C1C2C4] mt-2">
+          <div className="flex flex-wrap gap-x-2 gap-y-1 text-xs sm:text-[18px] text-[#C1C2C4] mt-2">
             <span>Misteri</span>
             <span>•</span>
             <span>Kriminal</span>

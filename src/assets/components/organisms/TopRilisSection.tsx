@@ -29,7 +29,7 @@ export default function TopRatingSection({
         Rilis Baru
       </h2>
 
-      <div className="relative overflow-hidden pb-[50px] pt-[50px]">
+      <div className="relative overflow-hidden md:pb-[50px] md:pt-[50px]">
         <Button
           variant="icon"
           className="
