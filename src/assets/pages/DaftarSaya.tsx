@@ -24,7 +24,9 @@ export default function DaftarSaya({
       <Navbar />
 
       <div className="px-4 md:px-[80px] py-10">
-        <h1 className="text-[32px] font-bold mb-6">Daftar Saya</h1>
+        <h1 className="md:text-[32px] text-[20px] font-bold mb-6">
+          Daftar Saya
+        </h1>
 
         {myList.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center ">
@@ -55,19 +57,23 @@ export default function DaftarSaya({
             </p>
 
             <Button
-              variant="outline"
-              className="bg-white text-black hover:bg-gray-200 px-6 py-3"
+              variant="primary"
+              className="bg-white text-gray-800 hover:bg-gray-200 hover:text-white font-bold px-6 py-3"
               onClick={() => (window.location.href = "/home")}
             >
               Jelajahi Film
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-[5px] md:gap-[10px]">
             {myList.map((movie) => (
               <div
                 key={movie.id}
                 className="
+                        w-[95px]
+                        h-[145px]
+                        md:w-[200px]
+                        md:h-[300px]
                         relative
                         cursor-pointer
                         rounded-md
@@ -91,7 +97,8 @@ export default function DaftarSaya({
                         flex flex-col
                         items-center
                         justify-center
-                        gap-4
+                        gap-2
+                        md:gap-4
                         opacity-0
                         transition-opacity duration-300
                         hover:opacity-100
@@ -109,7 +116,9 @@ export default function DaftarSaya({
                                 transform
                                 transition-all
                                 duration-200
-                                hover:scale-110"
+                                hover:scale-105
+                                md:hover:scale-110
+                                p-2 md:p-3"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +126,7 @@ export default function DaftarSaya({
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="size-5
+                      className="size-4 md:size-5
                       text-white
                                   transition-colors
                                   group-hover:text-red-500
@@ -134,8 +143,14 @@ export default function DaftarSaya({
                     variant="outline"
                     onClick={() => onToggleWatched(movie.id)}
                     className="
-                                text-sm
-                                px-4 py-2
+                                md:w-[160px]
+                                md:h-[50px]
+                                w-[80px]
+                                h-[20px]
+                                text-[5px]
+                                md:text-sm
+                                px-2 py-1
+                                sm:px-4 sm:py-2
                                 bg-white/10
                                 hover:bg-white/20
                             "
