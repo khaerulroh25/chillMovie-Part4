@@ -1,5 +1,5 @@
 import Button from "../atoms/Buttons";
-import playIcon from "../../img/icons/Vector.png";
+import playIcon from "../../img/icons/vector.png";
 import checkIcon from "../../img/icons/check.png";
 import chevronIcon from "../../img/icons/chevron-down.png";
 import addIcon from "../../img/icons/plus.png";
