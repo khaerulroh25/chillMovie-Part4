@@ -57,7 +57,7 @@ export default function DaftarSaya({
             </p>
 
             <Button
-              variant="primary"
+              variant="outline"
               className="bg-white text-gray-800 hover:bg-gray-200 hover:text-white font-bold px-6 py-3"
               onClick={() => (window.location.href = "/home")}
             >
