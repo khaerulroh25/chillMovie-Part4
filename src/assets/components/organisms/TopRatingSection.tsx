@@ -1,12 +1,12 @@
+import { useState } from "react";
+import MovieDetailModal from "../molecules/MoviedetailModal";
 import TopRatingCard from "../molecules/TopRatingCard";
 import Button from "../atoms/Buttons";
-
 import img1 from "../../img/movies/image218.png";
 import img2 from "../../img/movies/image230.png";
 import img3 from "../../img/movies/image234.png";
 import img4 from "../../img/movies/image214.png";
 import img5 from "../../img/movies/image217.png";
-
 import arrowLeft from "../../img/icons/arrow-left.png";
 import arrowRight from "../../img/icons/arrow-right.png";
 
@@ -22,6 +22,7 @@ interface TopRatingSectionProps {
 export default function TopRatingSection({
   onAddToMyList,
 }: TopRatingSectionProps) {
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   return (
     <section className=" md:w-[1440px] md:h-[512px] ">
       <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
@@ -66,28 +67,58 @@ export default function TopRatingSection({
             poster={img1}
             badge="episode"
             onAddToMyList={onAddToMyList}
+            onOpenDetail={() =>
+              setSelectedMovie({
+                id: "top-1",
+                poster: img1,
+              })
+            }
           />
           <TopRatingCard
             id="top-2"
             poster={img2}
             onAddToMyList={onAddToMyList}
+            onOpenDetail={() =>
+              setSelectedMovie({
+                id: "top-2",
+                poster: img1,
+              })
+            }
           />
           <TopRatingCard
             id="top-3"
             poster={img3}
             onAddToMyList={onAddToMyList}
+            onOpenDetail={() =>
+              setSelectedMovie({
+                id: "top-3",
+                poster: img1,
+              })
+            }
           />
           <TopRatingCard
             id="top-4"
             poster={img4}
             badge="episode"
             onAddToMyList={onAddToMyList}
+            onOpenDetail={() =>
+              setSelectedMovie({
+                id: "top-4",
+                poster: img1,
+              })
+            }
           />
           <TopRatingCard
             id="top-5"
             poster={img5}
             badge="top10"
             onAddToMyList={onAddToMyList}
+            onOpenDetail={() =>
+              setSelectedMovie({
+                id: "top-5",
+                poster: img1,
+              })
+            }
           />
         </div>
 
@@ -107,6 +138,12 @@ export default function TopRatingSection({
           <img src={arrowRight} className="w-4 h-4" />
         </Button>
       </div>
+      <MovieDetailModal
+        open={!!selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+        poster={selectedMovie?.poster ?? ""}
+        title="Ted Lasso"
+      />
     </section>
   );
 }

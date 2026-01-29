@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteMovie } from "../../../services/api/movieApi";
 import { getMovies } from "../../../services/api/movieApi";
-
 import Button from "../atoms/Buttons";
 import playIcon from "../../img/icons/vector.png";
 import checkIcon from "../../img/icons/check.png";
@@ -19,6 +18,7 @@ interface TopRatingCardProps {
   badge?: "episode" | "top10";
   myList?: Movie[];
   onAddToMyList: (movie: Movie) => Promise<string>;
+  onOpenDetail: () => void;
 }
 
 export default function TopRatingCard({
@@ -26,6 +26,7 @@ export default function TopRatingCard({
   poster,
   badge,
   onAddToMyList,
+  onOpenDetail,
 }: TopRatingCardProps) {
   const [added, setAdded] = useState(false);
   const [apiId, setApiId] = useState<string | null>(null);
@@ -129,6 +130,7 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
+                onClick={onOpenDetail}
                 className=" ml-auto border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img

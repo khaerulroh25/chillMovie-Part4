@@ -2,39 +2,54 @@ import Navbar from "../components/organisms/Navbar";
 import Footer from "../components/organisms/Footer";
 import Button from "../components/atoms/Buttons";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { Movie } from "../../store/redux/movieSlice";
+
 import {
-  deleteMovie,
   getMovies,
+  deleteMovie,
   updateMovie,
 } from "../../services/api/movieApi";
+import {
+  setMovies,
+  deleteMovie as deleteMovieRedux,
+  updateMovie as updateMovieRedux,
+} from "../../store/redux/movieSlice";
 
-type Movie = {
-  id: string;
-  poster: string;
-  watched?: boolean;
-};
+import type { RootState } from "../../store/redux/store";
 
 export default function DaftarSaya() {
-  const [myList, setMyList] = useState<Movie[]>([]);
+  const dispatch = useDispatch();
+  const myList = useSelector((state: RootState) => state.movie.movies);
   useEffect(() => {
-    getMovies().then((data) => {
-      setMyList(data);
-    });
-  }, []);
+    const fetchMovies = async () => {
+      const data = await getMovies();
+
+      const normalizedData = data.map((movie) => ({
+        ...movie,
+        watched: movie.watched ?? false,
+      }));
+
+      dispatch(setMovies(normalizedData));
+    };
+
+    fetchMovies();
+  }, [dispatch]);
 
   const handleRemove = async (id: string) => {
     await deleteMovie(id);
-    setMyList((prev) => prev.filter((movie) => movie.id !== id));
+    dispatch(deleteMovieRedux(id));
   };
 
   const handleToggleWatched = async (movie: Movie) => {
-    await updateMovie(movie.id, {
+    const updatedMovie = {
+      ...movie,
       watched: !movie.watched,
-    });
-    setMyList((prev) =>
-      prev.map((m) => (m.id === movie.id ? { ...m, watched: !m.watched } : m)),
-    );
+    };
+
+    await updateMovie(movie.id, updatedMovie);
+    dispatch(updateMovieRedux(updatedMovie));
   };
 
   return (
