@@ -81,7 +81,7 @@ export default function TopRatingSection({
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-2",
-                poster: img1,
+                poster: img2,
               })
             }
           />
@@ -92,7 +92,7 @@ export default function TopRatingSection({
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-3",
-                poster: img1,
+                poster: img3,
               })
             }
           />
@@ -104,7 +104,7 @@ export default function TopRatingSection({
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-4",
-                poster: img1,
+                poster: img4,
               })
             }
           />
@@ -116,7 +116,7 @@ export default function TopRatingSection({
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-5",
-                poster: img1,
+                poster: img5,
               })
             }
           />
