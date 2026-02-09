@@ -53,7 +53,7 @@ export default function DaftarSaya() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="md:w-[1440px] md:h-[1237px] bg-black text-white font-sans">
       <Navbar />
 
       <div className="px-4 md:px-[80px] py-10">
@@ -105,7 +105,7 @@ export default function DaftarSaya() {
                 className="
                         w-[95px]
                         h-[145px]
-                        md:w-[170px]
+                        md:w-[200px]
                         md:h-[300px]
                         relative
                         cursor-pointer

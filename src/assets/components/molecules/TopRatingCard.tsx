@@ -29,7 +29,11 @@ export default function TopRatingCard({
   return (
     <div className="relative shrink-0">
       <div
-        onClick={onOpenDetail}
+        onClick={() => {
+          if (window.innerWidth < 768) {
+            onOpenDetail();
+          }
+        }}
         className="
         group
         relative
