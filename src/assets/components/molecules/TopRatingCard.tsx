@@ -16,8 +16,8 @@ interface TopRatingCardProps {
   id: string;
   poster: string;
   badge?: "episode" | "top10";
-  myList?: Movie[];
-  onAddToMyList: (movie: Movie) => Promise<string>;
+  isAdded: boolean;
+  onToggleMyList: (movie: Movie) => void;
   onOpenDetail: () => void;
 }
 
@@ -25,26 +25,10 @@ export default function TopRatingCard({
   id,
   poster,
   badge,
-  onAddToMyList,
+  isAdded,
+  onToggleMyList,
   onOpenDetail,
 }: TopRatingCardProps) {
-  const [added, setAdded] = useState(false);
-  const [apiId, setApiId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const syncWithApi = async () => {
-      const movies = await getMovies();
-      const found = movies.find((m: Movie) => m.poster === poster);
-
-      if (found) {
-        setAdded(true);
-        setApiId(found.id);
-      }
-    };
-
-    syncWithApi();
-  }, [poster]);
-
   return (
     <div className="relative shrink-0">
       <div
@@ -108,21 +92,11 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
-                onClick={async () => {
-                  if (!added) {
-                    const newApiId = await onAddToMyList({ id, poster });
-                    setApiId(newApiId);
-                    setAdded(true);
-                  } else {
-                    await deleteMovie(apiId!);
-                    setApiId(null);
-                    setAdded(false);
-                  }
-                }}
+                onClick={() => onToggleMyList({ id, poster })}
                 className=" border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img
-                  src={added ? checkIcon : addIcon}
+                  src={isAdded ? checkIcon : addIcon}
                   alt="Tambah"
                   className="md:w-4 md:h-4 w-3 h-3"
                 />

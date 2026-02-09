@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getMovies, deleteMovie } from "../../../services/api/movieApi";
 import TopRatingCard from "../molecules/TopRatingCard";
 import MovieDetailModal from "../molecules/MoviedetailModal";
 import Button from "../atoms/Buttons";
@@ -14,6 +15,7 @@ import arrowRight from "../../img/icons/arrow-right.png";
 type Movie = {
   id: string;
   poster: string;
+  title?: string;
 };
 
 interface TopRilisSectionProps {
@@ -24,6 +26,26 @@ export default function TopRatingSection({
   onAddToMyList,
 }: TopRilisSectionProps) {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [myList, setMyList] = useState<Movie[]>([]);
+  useEffect(() => {
+    const fetchMyList = async () => {
+      const movies = await getMovies();
+      setMyList(movies);
+    };
+    fetchMyList();
+  }, []);
+
+  const handleToggleMyList = async (movie: Movie) => {
+    const found = myList.find((m) => m.poster === movie.poster);
+    if (found) {
+      await deleteMovie(found.id);
+      setMyList((prev) => prev.filter((m) => m.id !== found.id));
+    } else {
+      const newId = await onAddToMyList(movie);
+      setMyList((prev) => [...prev, { ...movie, id: newId }]);
+    }
+  };
+
   return (
     <section className="md:w-[1440px] md:h-[512px]">
       <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
@@ -67,11 +89,13 @@ export default function TopRatingSection({
             id="top-6"
             poster={img1}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img1)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-6",
                 poster: img1,
+                title: "The Little Mermaid",
               })
             }
           />
@@ -79,11 +103,13 @@ export default function TopRatingSection({
             id="top-7"
             poster={img2}
             badge="episode"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img2)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-7",
                 poster: img2,
+                title: "Dutty After School",
               })
             }
           />
@@ -91,11 +117,13 @@ export default function TopRatingSection({
             id="top-8"
             poster={img3}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img3)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
-                id: "top-6",
+                id: "top-8",
                 poster: img3,
+                title: "Big Hero 6",
               })
             }
           />
@@ -103,22 +131,26 @@ export default function TopRatingSection({
             id="top-9"
             poster={img4}
             badge="episode"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img4)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-9",
                 poster: img4,
+                title: "All of Us Are Dead",
               })
             }
           />
           <TopRatingCard
             id="10"
             poster={img5}
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img5)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-10",
                 poster: img5,
+                title: "Missing",
               })
             }
           />
@@ -145,6 +177,10 @@ export default function TopRatingSection({
         onClose={() => setSelectedMovie(null)}
         poster={selectedMovie?.poster ?? ""}
         title="Ted Lasso"
+        isAdded={myList.some((m) => m.poster === selectedMovie?.poster)}
+        onToggleMyList={() =>
+          selectedMovie && handleToggleMyList(selectedMovie)
+        }
       />
     </section>
   );

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getMovies, deleteMovie } from "../../../services/api/movieApi";
 import TopRatingCard from "../molecules/TopRatingCard";
 import MovieDetailModal from "../molecules/MoviedetailModal";
 import Button from "../atoms/Buttons";
@@ -15,15 +16,35 @@ import arrowRight from "../../img/icons/arrow-right.png";
 type Movie = {
   id: string;
   poster: string;
+  title?: string;
 };
 
 interface TopTrandingSectionProps {
   onAddToMyList: (movie: Movie) => Promise<string>;
 }
-export default function TopRatingSection({
+export default function TopTrandingSection({
   onAddToMyList,
 }: TopTrandingSectionProps) {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [myList, setMyList] = useState<Movie[]>([]);
+  useEffect(() => {
+    const fetchMyList = async () => {
+      const movies = await getMovies();
+      setMyList(movies);
+    };
+
+    fetchMyList();
+  }, []);
+  const handleToggleMyList = async (movie: Movie) => {
+    const found = myList.find((m) => m.poster === movie.poster);
+    if (!found) {
+      const newId = await onAddToMyList(movie);
+      setMyList((prev) => [...prev, { ...movie, id: newId }]);
+    } else {
+      await deleteMovie(found.id);
+      setMyList((prev) => prev.filter((m) => m.id !== found.id));
+    }
+  };
   return (
     <section className="md:w-[1440px] md:h-[512px]">
       <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
@@ -67,11 +88,13 @@ export default function TopRatingSection({
             id="top-11"
             poster={img1}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img1)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-11",
                 poster: img1,
+                title: "The Tomorrow War",
               })
             }
           />
@@ -79,11 +102,13 @@ export default function TopRatingSection({
             id="top-12"
             poster={img2}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img2)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-12",
                 poster: img2,
+                title: "Quantumania",
               })
             }
           />
@@ -91,11 +116,13 @@ export default function TopRatingSection({
             id="top-13"
             poster={img3}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img3)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-13",
                 poster: img3,
+                title: "Guardians of the Galaxy Vol. 3",
               })
             }
           />
@@ -103,11 +130,13 @@ export default function TopRatingSection({
             id="top-14"
             poster={img4}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img4)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-14",
                 poster: img4,
+                title: "A Man Called Otto",
               })
             }
           />
@@ -115,11 +144,13 @@ export default function TopRatingSection({
             id="top-15"
             poster={img5}
             badge="top10"
-            onAddToMyList={onAddToMyList}
+            isAdded={myList.some((m) => m.poster === img5)}
+            onToggleMyList={handleToggleMyList}
             onOpenDetail={() =>
               setSelectedMovie({
                 id: "top-15",
                 poster: img5,
+                title: "The Little Mermaid",
               })
             }
           />
@@ -145,7 +176,11 @@ export default function TopRatingSection({
         open={selectedMovie !== null}
         onClose={() => setSelectedMovie(null)}
         poster={selectedMovie?.poster ?? ""}
-        title={selectedMovie?.id ?? ""}
+        title={selectedMovie?.title ?? ""}
+        isAdded={myList.some((m) => m.poster === selectedMovie?.poster)}
+        onToggleMyList={() =>
+          selectedMovie && handleToggleMyList(selectedMovie)
+        }
       />
     </section>
   );

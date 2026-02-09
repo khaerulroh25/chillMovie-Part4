@@ -105,7 +105,7 @@ export default function DaftarSaya() {
                 className="
                         w-[95px]
                         h-[145px]
-                        md:w-[200px]
+                        md:w-[170px]
                         md:h-[300px]
                         relative
                         cursor-pointer

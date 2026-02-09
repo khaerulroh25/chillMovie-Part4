@@ -1,5 +1,6 @@
 import Button from "../atoms/Buttons";
 import addIcon from "../../img/icons/plus.png";
+import checkIcon from "../../img/icons/check.png";
 import volumeIcon from "../../img/icons/volume-off.png";
 import close from "../../img/icons/close.png";
 
@@ -8,11 +9,15 @@ interface MovieDetailModalProps {
   onClose: () => void;
   poster: string;
   title: string;
+  isAdded?: boolean;
+  onToggleMyList: () => void;
 }
 
 export default function MovieDetailModal({
   open,
   onClose,
+  onToggleMyList,
+  isAdded,
   poster,
   title,
 }: MovieDetailModalProps) {
@@ -90,12 +95,13 @@ export default function MovieDetailModal({
               </Button>
               <Button
                 variant="icon"
+                onClick={onToggleMyList}
                 className="w-[24px] h-[24px] md:w-[44px] md:h-[44px] bg-transparent border border-solid border-white/30"
               >
                 <img
-                  src={addIcon}
+                  src={isAdded ? checkIcon : addIcon}
                   alt="Tambah"
-                  className="md:w-[10px] md:h-[10px] w-[14px] h-[14px]"
+                  className="md:w-[14px] md:h-[14px] w-[10px] h-[10px]"
                 />
               </Button>
               <Button
@@ -105,7 +111,7 @@ export default function MovieDetailModal({
                 <img
                   src={volumeIcon}
                   alt="volume"
-                  className="md:w-[13px] md:h-[13px] w-[18px] h-[18px]"
+                  className="md:w-[18px] md:h-[18px] w-[13px] h-[13px]"
                 />
               </Button>
             </div>
