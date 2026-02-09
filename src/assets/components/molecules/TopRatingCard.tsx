@@ -29,6 +29,7 @@ export default function TopRatingCard({
   return (
     <div className="relative shrink-0">
       <div
+        onClick={onOpenDetail}
         className="
         group
         relative
@@ -39,6 +40,7 @@ export default function TopRatingCard({
         shrink-0
         rounded-[4px]
         cursor-pointer
+        md:pointer-events-auto
       "
       >
         <img
@@ -78,6 +80,9 @@ export default function TopRatingCard({
             <div className="flex items-center  gap-4 mb-4">
               <Button
                 variant="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
                 className=" bg-white hover:bg-gray-200 p-2 md:p-3"
               >
                 <img
@@ -89,7 +94,10 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
-                onClick={() => onToggleMyList({ id, poster })}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleMyList({ id, poster });
+                }}
                 className=" border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img
@@ -101,7 +109,10 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
-                onClick={onOpenDetail}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenDetail();
+                }}
                 className=" ml-auto border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img
