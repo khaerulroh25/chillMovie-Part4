@@ -53,7 +53,7 @@ export default function DaftarSaya() {
   };
 
   return (
-    <div className="md:w-[1440px] md:h-[1237px] bg-black text-white font-sans">
+    <div className="md:w-[1440px] min-h-screen bg-black text-white font-sans">
       <Navbar />
 
       <div className="px-4 md:px-[80px] py-10">
