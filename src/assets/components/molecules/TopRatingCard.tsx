@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { deleteMovie } from "../../../services/api/movieApi";
-import { getMovies } from "../../../services/api/movieApi";
 import Button from "../atoms/Buttons";
 import playIcon from "../../img/icons/vector.png";
 import checkIcon from "../../img/icons/check.png";
